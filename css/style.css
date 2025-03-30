@@ -49,6 +49,74 @@ CSS INDEX
   --font-lato: "Lato", sans-serif;
 }
 
+/* Speaker Container */
+.speaker-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+/* Speaker Card */
+.speaker-card {
+  width: 550px;
+  background: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 20px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.speaker-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Speaker Image */
+.speaker-card img {
+  width: 100%;
+  height: 400px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+/* Speaker Name */
+.speaker-card h3 {
+  margin: 15px 0;
+  font-size: 18px;
+  font-weight: lighter;
+  color: #88454e;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+.speaker-card h2 {
+  margin: 15px 0;
+  font-size: 25px;
+  font-weight: bold;
+  color: #676a7e;
+  font-family: cursive;
+}
+
+/* LinkedIn Icon */
+.speaker-card a {
+  display: inline-block;
+  text-decoration: none;
+  color: #043c5a;
+  transition: color 0.3s;
+}
+
+.speaker-card a:hover {
+  color: #0c9fee;
+}
+
+/* SVG Icon */
+.linkedin-icon {
+  width: 30px;
+  height: 30px;
+  fill: none;
+  stroke: currentColor;
+}
+
 html {
   font-size: 62.5%;
 }
