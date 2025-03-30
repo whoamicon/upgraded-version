@@ -1,53 +1,35 @@
 document.addEventListener("DOMContentLoaded", () => {
     "use strict";
-    function triggerCountdown(countdownElem, days, hours, minutes, seconds) {
-        // Function to set the countdown duration using Date objects
-        function setCountdown() {
-            const now = new Date().getTime(); // Current time in milliseconds
-
-            // Calculate the countdown duration in milliseconds
-            const countdownDuration = (days * 24 * 60 * 60 * 1000)   // Days in milliseconds
-                + (hours * 60 * 60 * 1000)        // Hours in milliseconds
-                + (minutes * 60 * 1000)           // Minutes in milliseconds
-                + (seconds * 1000);               // Seconds in milliseconds
-
-            // Return the new countdown target time
-            return now + countdownDuration;
-        }
-
-        // Initialize the countdown target date
-        let countdownDate = setCountdown();
-
-        // Update the countdown every 1 second
-        const countdownInterval = setInterval(function () {
+    
+    function triggerCountdown(countdownElem, targetDate) {
+        function updateCountdown() {
             const now = new Date().getTime();
+            const distance = targetDate - now;
 
-            // Find the distance between now and the countdown date
-            const distance = countdownDate - now;
+            if (distance <= 0) {
+                document.querySelector(countdownElem).innerHTML = "Countdown Over!";
+                clearInterval(countdownInterval);
+                return;
+            }
 
-            // Time calculations for days, hours, minutes, and seconds
-            const displayDays = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const displayHours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const displayMinutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const displaySeconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Display the result in the element with id="countdown"
-            // document.getElementById("countdown").innerHTML = `${displayDays}d ${displayHours}h ${displayMinutes}m ${displaySeconds}s`;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
             const countdownElement = document.querySelector(countdownElem);
+            countdownElement.querySelector(".days").innerHTML = days;
+            countdownElement.querySelector(".hours").innerHTML = hours;
+            countdownElement.querySelector(".minutes").innerHTML = minutes;
+            countdownElement.querySelector(".seconds").innerHTML = seconds;
+        }
 
-            countdownElement.querySelector(".days").innerHTML = displayDays;
-            countdownElement.querySelector(".hours").innerHTML = displayHours;
-            countdownElement.querySelector(".minutes").innerHTML = displayMinutes;
-            countdownElement.querySelector(".seconds").innerHTML = displaySeconds;
-
-            // If the countdown reaches zero, reset it
-            if (distance < 0) {
-                countdownDate = setCountdown(); // Reset the countdown date
-            }
-        }, 1000);
+        updateCountdown();
+        const countdownInterval = setInterval(updateCountdown, 1000);
     }
 
-    triggerCountdown(".et-countdown", 0, 0, 0, 10);
+    // Set target date to April 5, 2025
+    const targetDate = new Date("April 5, 2025 10:00:00").getTime();
 
+    triggerCountdown(".et-countdown", targetDate);
 });
