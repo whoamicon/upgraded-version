@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const distance = targetDate - now;
 
             if (distance <= 0) {
-                document.querySelector(countdownElem).innerHTML = "Countdown Over!";
+                document.querySelector(countdownElem).innerHTML = "Event Started and it will be over at 26/07/25 (03:00 PM)!";
                 clearInterval(countdownInterval);
                 return;
             }
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Set target date to April 5, 2025
-    const targetDate = new Date("April 5, 2025 10:00:00").getTime();
+    const targetDate = new Date("July 26, 2025 11:30:00").getTime();
 
     triggerCountdown(".et-countdown", targetDate);
 });
